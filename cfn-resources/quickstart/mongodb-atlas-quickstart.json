@@ -1,0 +1,93 @@
+{
+    "typeName": "MongoDB::Atlas::Quickstart",
+    "description": "A quick way to get started with MongoDB Atlas on AWS",
+    "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+    "definitions": {
+    },
+    "properties": {
+	"AtlasApiKeySecret": {
+            "description": "An AWS Secrets Manager Secret with your MongoDB Atlas Api Key.",
+            "type": "string"
+        },
+
+        "ClusterName": {
+            "description": "Name of your MongoDB Atlas Cluster.",
+            "type": "string",
+            "maxLength": 50
+        },
+        "Region": {
+            "description": "AWS Region.",
+            "type": "string"
+        },
+        "ClusterSize": {
+            "type": "string",
+            "enum": [
+                "M0",
+                "M5",
+                "M10"
+            ]
+        },
+        "AddSampleData": {
+            "description": "Would you like to load sample data into your cluster?",
+            "type": "boolean"
+        },
+        "IAMRole": {
+            "description": "IAM Role generated for accessing your new cluster, read only.",
+            "type": "string"
+        },
+        "ConnectionString": {
+            "description": "Connection string for accessing your new cluster, read only.",
+            "type": "string"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "ClusterName"
+    ],
+    "createOnlyProperties": [
+        "/properties/ClusterName"
+    ],
+   "readOnlyProperties": [
+        "/properties/IAMRole",
+        "/properties/ConnectionStrings"
+    ],
+    "primaryIdentifier": [
+        "/properties/ClusterName"
+    ],
+    "handlers": {
+        "create": {
+            "permissions": [
+                "secretsmanager:DescribeSecret",
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:PutSecretValue",
+                "secretsmanager:UpdateSecretVersionStage",
+                "secretsmanager:CreateSecret",
+                "secretsmanager:CreateSecretInput"
+            ]
+        },
+        "read": {
+            "permissions": [
+                "secretsmanager:DescribeSecret",
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:PutSecretValue",
+                "secretsmanager:UpdateSecretVersionStage",
+                "secretsmanager:CreateSecret",
+                "secretsmanager:CreateSecretInput"
+            ]
+        },
+        "update": {
+            "permissions": [
+            ]
+        },
+        "delete": {
+            "permissions": [
+                "secretsmanager:DescribeSecret",
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:PutSecretValue",
+                "secretsmanager:UpdateSecretVersionStage",
+                "secretsmanager:CreateSecret",
+                "secretsmanager:CreateSecretInput"
+            ]
+        }
+    }
+}
