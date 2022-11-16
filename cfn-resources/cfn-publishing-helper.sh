@@ -37,17 +37,17 @@ _DEFAULT_LOG_LEVEL=${LOG_LEVEL:-info}
 _CFN_TEST_LOG_BUCKET=${CFN_TEST_LOG_BUCKET:-mongodb-cfn-testing}
 major_version=${CFN_PUBLISH_MAJOR_VERSION:-0}
 minor_version=${CFN_PUBLISH_MINOR_VERSION:-0}
-version="00000003"
+version="00000001"
 
 [[ "${_DRY_RUN}" == "true" ]] && echo "*************** DRY_RUN mode enabled **************"
 
 # Default, find all the directory names with the json custom resource schema files.
-resources="${1:-database-user}"
+resources="${1:-cloud-backup-snapshot}"
 #  database-user project-ip-access-list network-peering cluster (isolate Project ^^ for 11/7/22 testing)
 echo "$(basename "$0") running for the following resources: ${resources}"
 
 echo "Step 1/2: cfn test in the cloud...."
-#aws s3 mb "s3://${_CFN_TEST_LOG_BUCKET}"
+aws s3 mb "s3://${_CFN_TEST_LOG_BUCKET}"
 for resource in ${resources};
 do
     echo "Working on resource:${resource}"
