@@ -5,5 +5,5 @@
     "PrivateKey" : "$ATLAS_PRIVATE_KEY"
   },
   "RegionName": "$ATLAS_REGION_NAME",
-  "AtlasCIDRBlock": "10.8.0.0/21"
+  "AtlasCidrBlock": "10.8.0.0/21"
 }

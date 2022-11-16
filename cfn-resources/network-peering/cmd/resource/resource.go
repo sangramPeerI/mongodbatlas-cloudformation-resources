@@ -287,7 +287,7 @@ func List(req handler.Request, prevModel *Model, currentModel *Model) (handler.P
 			resp.Response), nil
 	}
 
-	var models []interface{}
+	models := []interface{}{}
 	for i := range peerResponse {
 		var model Model
 		model.AccepterRegionName = &peerResponse[i].AccepterRegionName

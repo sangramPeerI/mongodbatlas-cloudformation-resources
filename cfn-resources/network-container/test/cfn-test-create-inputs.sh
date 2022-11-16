@@ -18,6 +18,18 @@ if [[ "$*" == help ]]; then usage; fi
 rm -rf inputs
 mkdir inputs
 
+projectName="$1"
+ATLAS_PROJECT_ID=$(mongocli iam projects list --output json | jq --arg NAME "${projectName}" -r '.results[] | select(.name==$NAME) | .id')
+if [ -z "$ATLAS_PROJECT_ID" ]; then
+    ATLAS_PROJECT_ID=$(mongocli iam projects create "${projectName}" --output=json | jq -r '.id')
+
+    echo -e "Created project \"${projectName}\" with id: ${ATLAS_PROJECT_ID}\n"
+else
+    echo -e "FOUND project \"${projectName}\" with id: ${ATLAS_PROJECT_ID}\n"
+fi
+
+ATLAS_REGION_NAME="US_EAST_1"
+
 
 jq --arg pubkey "$ATLAS_PUBLIC_KEY" \
    --arg pvtkey "$ATLAS_PRIVATE_KEY" \

@@ -58,6 +58,10 @@
         },
         "ApiKeys": {
             "$ref": "#/definitions/apiKeyDefinition"
+        },
+        "ProviderName": {
+            "description": "Cloud service provider that serves the requested network peering containers.",
+            "type": "string"
         }
     },
     "additionalProperties": false,
