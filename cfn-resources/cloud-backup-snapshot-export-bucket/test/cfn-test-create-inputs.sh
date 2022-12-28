@@ -80,13 +80,10 @@ echo "--------------------------------authorize mongodb  Role ends -------------
 
 #create the s3 bucket
 
-bucketName="cloud-backup-snapshot-test-"${awsRegion}
+bucketName="cloud-backup-snapshot-test123-"${awsRegion}
 
-if [[ "${awsRegion}" == "us-east-1" ]]; then
-  aws s3api create-bucket --bucket $bucketName --region $awsRegion
-else
-  aws s3api create-bucket --bucket $bucketName --region $awsRegion --create-bucket-configuration LocationConstraint=$awsRegion
-fi
+aws s3 rb s3://${bucketName} --force
+aws s3 mb s3://${bucketName} --output json
 
 if [ "$#" -ne 2 ]; then usage; fi
 if [[ "$*" == help ]]; then usage; fi
