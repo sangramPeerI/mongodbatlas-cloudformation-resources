@@ -43,6 +43,6 @@ echo "--------------------------------delete role ends -------------------------
 
 bucketName="cloud-backup-snapshot-test-"${awsRegion}
 
-aws s3api delete-bucket --bucket ${bucketName} --region ${awsRegion}
+aws s3 rb s3://${bucketName} --force
 echo "--------------------------------delete bucket ends ----------------------------"\n
 #mongocli iam projects delete "${projectId}" --force
